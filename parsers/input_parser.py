@@ -1,4 +1,4 @@
-from data_objects import *
+from data_objects import Grid, Rover, RoverSetup, Mars
 
 
 def parse(commands):
