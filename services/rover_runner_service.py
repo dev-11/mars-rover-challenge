@@ -1,46 +1,22 @@
 class RoverRunnerService:
-    def __init__(self, grid, rover):
+    def __init__(self, grid, rover, move_strategies, rotate_strategies):
         self._grid = grid
         self._rover = rover
+        self._move_strategies = move_strategies
+        self._rotate_strategies = rotate_strategies
 
     def run(self, commands: []):
 
         for command in commands:
             if command != 'M':
-                self.update_direction(command)
+                strategy = list(filter(lambda s: s.get_direction() == command
+                            and s.get_position() == self._rover.direction, self._rotate_strategies))[0]
             else:
-                self.update_position()
-                if not (0 <= self._rover.y <= self._grid.max_y) or not (0 <= self._rover.x <= self._grid.max_x):
-                    raise ValueError(f"We drove the rover off-grid: {self._rover}")
+                strategy = list(filter(lambda s: s.get_direction() == self._rover.direction, self._move_strategies))[0]
+
+            self._rover = strategy.update(self._rover)
+
+            if not (0 <= self._rover.y <= self._grid.max_y) or not (0 <= self._rover.x <= self._grid.max_x):
+                raise ValueError(f"We drove the rover off the grid: {self._rover}")
 
         return self._rover
-
-    def update_direction(self, command: chr):
-        if command == 'L':
-            if self._rover.direction == 'N':
-                self._rover.direction = 'W'
-            elif self._rover.direction == 'S':
-                self._rover.direction = 'E'
-            elif self._rover.direction == 'E':
-                self._rover.direction = 'N'
-            else:
-                self._rover.direction = 'S'
-        else:
-            if self._rover.direction == 'N':
-                self._rover.direction = 'E'
-            elif self._rover.direction == 'S':
-                self._rover.direction = 'W'
-            elif self._rover.direction == 'E':
-                self._rover.direction = 'S'
-            else:
-                self._rover.direction = 'N'
-
-    def update_position(self):
-        if self._rover.direction == 'N':
-            self._rover.y += 1
-        elif self._rover.direction == 'S':
-            self._rover.y -= 1
-        elif self._rover.direction == 'E':
-            self._rover.x += 1
-        else:
-            self._rover.x -= 1
