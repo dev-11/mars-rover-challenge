@@ -43,7 +43,7 @@ Here I introduced the strategy pattern to make the life easier, and the code cle
 
 When the runner tries to move the rover off grid the runner will raise a `ValueError`.  
 
-### Displaying positions
+### Displaying positions
 
 The `app.py` acts as a controller, pulls the data and logic together and as the very last step prints out the final position of each rover.
 
