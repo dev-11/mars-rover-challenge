@@ -38,10 +38,8 @@ The `services.RoverRunnerService` executes the commands on the rover inside grid
 To do that the instance of the service needs a `Grid`, a `Rover`, a `MoveStrategySelector`, and a `TurnStrategySelector`.
 After the service has been created we need to run the `run` command passing in the commands for the rover.
 
-
 The  `MoveStrategySelector` and `TurnStrategySelector` return a strategy, based on the actual command.
 Here I introduced the strategy pattern to make the life easier, and the code cleaner.
-
 
 When the runner tries to move the rover off grid the runner will raise a `ValueError`.  
 
@@ -56,8 +54,7 @@ I believe I've covered every edge case of the system with my 85 tests.
 At the moment I see two things.
 
 1.  There is no data validation at all, the system assumes that it will receive correct data.
-2.  If there is an error, like an invalid command or the rover is going off the grid, the system will fail.
-It would be nice to have a fail-safe solution where we log and ignore the error and continue the execution of the rover commands.    
+2.  If there is an error, like an invalid command or the rover is going off the grid, the system will fail. It would be nice to have a fail-safe solution where we log and ignore the error and continue the execution of the rover commands.    
 
 ---
 
