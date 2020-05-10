@@ -1,8 +1,8 @@
-from repositories import TxtRepository
 from parsers.input_parser import parse
 from services.rover_runner_service import RoverRunnerService
 from services.move_commands import MoveCommandSelector
 from services.turn_commands import TurnCommandSelector
+import repositories as repo
 import config
 import sys
 import getopt
@@ -25,7 +25,6 @@ def get_input_file_path(argv):
 
 
 def main(file_path):
-    repo = TxtRepository()
     command_input = repo.read_file(file_path)
     mars = parse(command_input)
 

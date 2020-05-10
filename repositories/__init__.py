@@ -1,1 +1,1 @@
-from .txt_repository import TxtRepository
+from .txt_repository import read_file
