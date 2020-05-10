@@ -66,10 +66,10 @@ class TestMoveCommandSelector(unittest.TestCase):
         ["east", 'E', 'E'],
         ["west", 'W', 'W'],
         ["south", 'S', 'S']])
-    def test_get_command_returns_correct_Command(self, name, cardinal_direction, Command_cardinal_direction):
+    def test_get_command_returns_correct_Command(self, name, cardinal_direction, command_cardinal_direction):
         mvs = mc.MoveCommandSelector()
         s = mvs.get_command(cardinal_direction)
-        self.assertEqual(Command_cardinal_direction, s.get_cardinal_direction())
+        self.assertEqual(command_cardinal_direction, s.get_cardinal_direction())
 
     @parameterized.expand([
         ["invalid_cardinal_direction",  '-'],

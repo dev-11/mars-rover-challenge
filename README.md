@@ -35,11 +35,8 @@ Mars(grid=Grid(max_x=5, max_y=5),
 
 ### Running rover runner
 The `services.RoverRunnerService` executes the commands on the rover inside grid.
-To do that the instance of the service needs a `Grid`, a `Rover`, a `MoveStrategySelector`, and a `TurnStrategySelector`.
+To do that the instance of the service needs a `Grid`, a `Rover`, a `MoveCommandSelector`, and a `TurnCommandSelector`.
 After the service has been created we need to run the `run` command passing in the commands for the rover.
-
-The  `MoveStrategySelector` and `TurnStrategySelector` return a strategy, based on the actual command.
-Here I introduced the [strategy pattern](https://en.wikipedia.org/wiki/Strategy_pattern) to make the life easier, and the code cleaner.
 
 When the runner tries to move the rover off grid the runner will raise a `ValueError`.  
 
