@@ -71,7 +71,6 @@ The unit tests can be run by the following command:
   pytest
 ```
 
-
 ---
 
 ## Introduction
