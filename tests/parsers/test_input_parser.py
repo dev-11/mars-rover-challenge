@@ -10,6 +10,11 @@ class TestInputParser(unittest.TestCase):
         mars = input_parser.parse(commands)
         self.assertEqual(marses.default_mars, mars)
 
+    def test_parse_returns_correct_data_for_lower_case_sample_commands(self):
+        commands = ['5 5', '1 2 N', 'lmlmlmlmm', '3 3 E', 'mmrmmrmrrm']
+        mars = input_parser.parse(commands)
+        self.assertEqual(marses.default_mars, mars)
+
     def test_parse_raises_IndexError_for_empty_input(self):
         commands = []
         self.assertRaises(IndexError, input_parser.parse, commands)
@@ -56,7 +61,7 @@ class TestInputParser(unittest.TestCase):
 
     def test_parse_raises_TypeError_for_None_rover_commands(self):
         commands = ['5 5', '1 1 C', None]
-        self.assertRaises(TypeError, input_parser.parse, commands)
+        self.assertRaises(AttributeError, input_parser.parse, commands)
 
     def test_parse_return_mars_data_with_empty_rover_commands(self):
         commands = ['5 5', '1 1 C', '']
