@@ -14,11 +14,11 @@ class RoverRunnerService:
 
     def run(self, commands: []):
 
-        for c in commands:
-            if c == 'M':
+        for command_name in commands:
+            if command_name == 'M':
                 command = self._move_command_selector.get_command(self._rover.cardinal_direction)
             else:
-                command = self._turn_commands_selector.get_command(self._rover.cardinal_direction, c)
+                command = self._turn_commands_selector.get_command(self._rover.cardinal_direction, command_name)
 
             updated_rover = command.execute(self._rover)
 
