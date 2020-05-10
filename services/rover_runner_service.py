@@ -23,7 +23,7 @@ class RoverRunnerService:
             updated_rover = strategy.update(self._rover)
 
             if not (0 <= updated_rover.y <= self._grid.max_y) or not (0 <= updated_rover.x <= self._grid.max_x):
-                raise ValueError(f"Can't drove the rover off the grid: {updated_rover}")
+                raise ValueError(f"Can't drive the rover off the grid: {updated_rover}")
             else:
                 self._rover = updated_rover
 
