@@ -1,8 +1,8 @@
 from repositories import TxtRepository
 from parsers.input_parser import parse
 from services.rover_runner_service import RoverRunnerService
-from services.move_strategies import MoveStrategySelector
-from services.turn_strategies import TurnStrategySelector
+from services.move_commands import MoveCommandSelector
+from services.turn_commands import TurnCommandSelector
 import config
 import sys
 import getopt
@@ -29,9 +29,9 @@ def main(file_path):
     command_input = repo.read_file(file_path)
     mars = parse(command_input)
 
-    move_strategy_selector = MoveStrategySelector()
-    turn_strategy_selector = TurnStrategySelector()
-    final_positions = [RoverRunnerService(mars.grid, rs.rover, move_strategy_selector, turn_strategy_selector).run(rs.commands)
+    move_command_selector = MoveCommandSelector()
+    turn_command_selector = TurnCommandSelector()
+    final_positions = [RoverRunnerService(mars.grid, rs.rover, move_command_selector, turn_command_selector).run(rs.commands)
                        for rs in mars.rover_setups]
 
     print(*final_positions, sep="\n")
