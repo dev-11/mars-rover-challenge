@@ -4,11 +4,29 @@ from services.rover_runner_service import RoverRunnerService
 from services.move_strategies import MoveStrategySelector
 from services.turn_strategies import TurnStrategySelector
 import config
+import sys
+import getopt
 
 
-def main():
+def get_input_file_path(argv):
+    input_file = config.default_input_file
+    try:
+        opts, args = getopt.getopt(argv, "hi:o:", ["ifile="])
+    except getopt.GetoptError:
+        print('app.py -i <input_file>')
+        sys.exit(2)
+    for opt, arg in opts:
+        if opt == '-h':
+            print('app.py -i <input_file>')
+            sys.exit()
+        elif opt in ("-i", "--ifile"):
+            input_file = arg
+    return input_file
+
+
+def main(file_path):
     repo = TxtRepository()
-    command_input = repo.read_file(config.default_input_file)
+    command_input = repo.read_file(file_path)
     mars = parse(command_input)
 
     move_strategy_selector = MoveStrategySelector()
@@ -20,4 +38,7 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    file = get_input_file_path(sys.argv[1:])
+    main(file)
+
+

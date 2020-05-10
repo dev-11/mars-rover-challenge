@@ -61,12 +61,14 @@ There is just one dependency which is the [parameterized](https://pypi.org/proje
 
 The app can be run by executing the following command. 
 ```shell script
- python3 app.py
+  app.py -i <input_file>
 ```
+
+If the app is not given an input file by the -i parameter it will reach for the default file.
 
 The unit tests can be run by the following command:
 ```shell script
-pytest
+  pytest
 ```
 
 
