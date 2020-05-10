@@ -16,9 +16,9 @@ class RoverRunnerService:
 
         for command_name in commands:
             if command_name == 'M':
-                command = self._move_command_selector.get_command(self._rover.cardinal_direction)
+                command = self._move_command_selector.select(self._rover.cardinal_direction)
             else:
-                command = self._turn_commands_selector.get_command(self._rover.cardinal_direction, command_name)
+                command = self._turn_commands_selector.select(self._rover.cardinal_direction, command_name)
 
             updated_rover = command.execute(self._rover)
 

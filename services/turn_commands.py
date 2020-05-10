@@ -131,7 +131,7 @@ class TurnCommandSelector:
     def __init__(self):
         self._strategies = get_turn_commands()
 
-    def get_command(self, cardinal_direction: chr, turning_direction: chr):
+    def select(self, cardinal_direction: chr, turning_direction: chr):
         return list(filter(lambda s: s.get_turning_direction() == turning_direction
                                      and s.get_cardinal_direction() == cardinal_direction,
                            self._strategies))[0]

@@ -63,6 +63,6 @@ class MoveCommandSelector:
     def __init__(self):
         self._strategies = get_move_commands()
 
-    def get_command(self, cardinal_direction: chr):
+    def select(self, cardinal_direction: chr):
         return list(filter(lambda s: s.get_cardinal_direction() == cardinal_direction,
                     self._strategies))[0]

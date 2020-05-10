@@ -158,10 +158,10 @@ class TestMoveCommandSelector(unittest.TestCase):
         ["right_east",  'E', 'E', 'R', 'R'],
         ["right_west",  'W', 'W', 'R', 'R'],
         ["right_south", 'S', 'S', 'R', 'R']])
-    def test_get_command_returns_correct_command(self, name, cardinal_direction, command_cardinal_direction,
+    def test_select_returns_correct_command(self, name, cardinal_direction, command_cardinal_direction,
                                                    turning_direction, command_turning_direction):
-        mvs = tc.TurnCommandSelector()
-        s = mvs.get_command(cardinal_direction, turning_direction)
+        tcs = tc.TurnCommandSelector()
+        s = tcs.select(cardinal_direction, turning_direction)
         self.assertEqual(command_cardinal_direction, s.get_cardinal_direction())
         self.assertEqual(command_turning_direction, s.get_turning_direction())
 
@@ -175,6 +175,6 @@ class TestMoveCommandSelector(unittest.TestCase):
         ["both_params_None", None, None],
         ["both_params_empty", '', ''],
         ["both_params_invalid",  '-', '-']])
-    def test_get_command_raises_error_for_incorrect_parameters(self, name, cardinal_direction, turning_direction):
+    def test_select_raises_error_for_incorrect_parameters(self, name, cardinal_direction, turning_direction):
         mvs = tc.TurnCommandSelector()
-        self.assertRaises(IndexError, mvs.get_command, cardinal_direction, turning_direction)
+        self.assertRaises(IndexError, mvs.select, cardinal_direction, turning_direction)
