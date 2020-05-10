@@ -1,18 +1,15 @@
-from abc import ABC, abstractmethod
+from abc import abstractmethod
+from services.command import Command
 import copy
 
 
-class TurnCommand(ABC):
+class TurnCommand(Command):
     @abstractmethod
     def get_cardinal_direction(self):
         pass
 
     @abstractmethod
     def get_turning_direction(self):
-        pass
-
-    @abstractmethod
-    def execute(self, rover):
         pass
 
 

@@ -1,15 +1,12 @@
 from data_objects import Rover
-from abc import ABC, abstractmethod
+from services.command import Command
+from abc import abstractmethod
 from copy import copy
 
 
-class MoveCommand(ABC):
+class MoveCommand(Command):
     @abstractmethod
     def get_cardinal_direction(self):
-        pass
-
-    @abstractmethod
-    def execute(self, rover: Rover):
         pass
 
 
