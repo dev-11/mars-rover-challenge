@@ -65,3 +65,20 @@ class TestRoverRunnerService(unittest.TestCase):
         mss = m.get_mocked_move_strategy_selector_south_strategy_only()
         rrs = RoverRunnerService(grid, rover, mss, tss)
         self.assertRaises(ValueError, rrs.run, ['M'])
+
+    def test_rover_runner_does_nothing_empty_command(self):
+        grid = small_mars_with_one_rover_empty_commands.grid
+        rover = small_mars_with_one_rover_empty_commands.rover_setups[0].rover
+        tss = m.get_mocked_turn_strategy_selector_turn_left_from_north_strategy_only()
+        mss = m.get_mocked_move_strategy_selector_north_strategy_only()
+        rrs = RoverRunnerService(grid, rover, mss, tss)
+        final_pos = rrs.run([])
+        self.assertEqual(rover, final_pos)
+
+    def test_rover_runner_raises_error_for_None_command(self):
+        grid = small_mars_with_one_rover_empty_commands.grid
+        rover = small_mars_with_one_rover_empty_commands.rover_setups[0].rover
+        tss = m.get_mocked_turn_strategy_selector_turn_left_from_north_strategy_only()
+        mss = m.get_mocked_move_strategy_selector_north_strategy_only()
+        rrs = RoverRunnerService(grid, rover, mss, tss)
+        self.assertRaises(TypeError, rrs.run, None)
