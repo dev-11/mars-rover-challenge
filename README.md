@@ -5,6 +5,62 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/76f03ad42cd84729850139f19201e9a2)](https://www.codacy.com/manual/dev-11/mars-rover-challenge?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=dev-11/mars-rover-challenge&amp;utm_campaign=Badge_Grade)
 [![Codacy Badge](https://api.codacy.com/project/badge/Coverage/76f03ad42cd84729850139f19201e9a2)](https://www.codacy.com/manual/dev-11/mars-rover-challenge?utm_source=github.com&utm_medium=referral&utm_content=dev-11/mars-rover-challenge&utm_campaign=Badge_Coverage)
 
+## The approach
+I assumed that the incoming commands are stored in a txt file.
+
+The flow of the code is the following:
+```text
++----------------------+     +----------------------+     +----------------------+     +----------------------+                
+|                      |     |                      |     |                      |     |                      |                
+|  reading input data  |---->|   parsing commands   |---->| running rover runner |---->| displaying positions |                
+|                      |     |                      |     |                      |     |                      |                
++----------------------+     +----------------------+     +----------------------+     +----------------------+ 
+```
+
+### Reading input data
+The `repositories.TxtRepository` reads up the given txt file.
+
+### Parsing commands
+The `parsers.parse` command expect an array of strings and returns a `Mars` object.
+This is the return value of the sample input:
+```python
+Mars(grid=Grid(max_x=5, max_y=5),
+     rover_setups=[
+        RoverSetup(rover=Rover(x=1, y=2, cardinal_direction='N'),
+                   commands=['L', 'M', 'L', 'M', 'L', 'M', 'L', 'M', 'M']),
+        RoverSetup(rover=Rover(x=3, y=3, cardinal_direction='E'),
+                   commands=['M', 'M', 'R', 'M', 'M', 'R', 'M', 'R', 'R', 'M'])
+    ])
+```
+
+### Running rover runner
+The `services.RoverRunnerService` executes the commands on the rover inside grid.
+To do that the instance of the service needs a `Grid`, a `Rover`, a `MoveStrategySelector`, and a `TurnStrategySelector`.
+After the service has been created we need to run the `run` command passing in the commands for the rover.
+
+
+The  `MoveStrategySelector` and `TurnStrategySelector` return a strategy, based on the actual command.
+Here I introduced the strategy pattern to make the life easier, and the code cleaner.
+
+
+When the runner tries to move the rover off grid the runner will raise a `ValueError`.  
+
+### Displaying positions
+
+The `app.py` acts as a controller, pulls the data and logic together and as the very last step prints out the final position of each rover.
+
+### Tests
+I believe I've covered every edge case of the system with my 85 tests.
+
+### Improvements 
+At the moment I see two things.
+
+1.  There is no data validation at all, the system assumes that it will receive correct data.
+2.  If there is an error, like an invalid command or the rover is going off the grid, the system will fail.
+It would be nice to have a fail-safe solution where we log and ignore the error and continue the execution of the rover commands.    
+
+---
+
 ## Introduction
 Below is a fun coding task that we would like you to complete. It should be considered an opportunity to demonstrate your creativity and ability to think outside the box. The problem demonstrates the minimum required for the output.
 
@@ -35,7 +91,7 @@ The output for each rover should be its final co-ordinates and heading.
 
 #### INPUT AND OUTPUT
 Test Input:
-```
+```text
 5 5
 1 2 N
 LMLMLMLMM
@@ -43,7 +99,7 @@ LMLMLMLMM
 MMRMMRMRRM
 ```
 Expected Output:
-```
+```text
 1 3 N
 5 1 E
 ```
