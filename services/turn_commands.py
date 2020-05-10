@@ -1,5 +1,6 @@
 from abc import abstractmethod
 from services.command import Command
+from data_classes import Rover
 import copy
 
 
@@ -28,7 +29,7 @@ class TurnLeftFromNorthCommand(TurnLeftCommand):
     def get_cardinal_direction(self):
         return 'N'
 
-    def execute(self, rover):
+    def execute(self, rover: Rover):
         updated_rover = copy.copy(rover)
         updated_rover.cardinal_direction = 'W'
         return updated_rover
@@ -39,7 +40,7 @@ class TurnLeftFromSouthCommand(TurnLeftCommand):
     def get_cardinal_direction(self):
         return 'S'
 
-    def execute(self, rover):
+    def execute(self, rover: Rover):
         updated_rover = copy.copy(rover)
         updated_rover.cardinal_direction = 'E'
         return updated_rover
@@ -50,7 +51,7 @@ class TurnLeftFromEastCommand(TurnLeftCommand):
     def get_cardinal_direction(self):
         return 'E'
 
-    def execute(self, rover):
+    def execute(self, rover: Rover):
         updated_rover = copy.copy(rover)
         updated_rover.cardinal_direction = 'N'
         return updated_rover
@@ -61,7 +62,7 @@ class TurnLeftFromWestCommand(TurnLeftCommand):
     def get_cardinal_direction(self):
         return 'W'
 
-    def execute(self, rover):
+    def execute(self, rover: Rover):
         updated_rover = copy.copy(rover)
         updated_rover.cardinal_direction = 'S'
         return updated_rover
@@ -72,7 +73,7 @@ class TurnRightFromNorthCommand(TurnRightCommand):
     def get_cardinal_direction(self):
         return 'N'
 
-    def execute(self, rover):
+    def execute(self, rover: Rover):
         updated_rover = copy.copy(rover)
         updated_rover.cardinal_direction = 'E'
         return updated_rover
@@ -83,7 +84,7 @@ class TurnRightFromSouthCommand(TurnRightCommand):
     def get_cardinal_direction(self):
         return 'S'
 
-    def execute(self, rover):
+    def execute(self, rover: Rover):
         updated_rover = copy.copy(rover)
         updated_rover.cardinal_direction = 'W'
         return updated_rover
@@ -94,7 +95,7 @@ class TurnRightFromEastCommand(TurnRightCommand):
     def get_cardinal_direction(self):
         return 'E'
 
-    def execute(self, rover):
+    def execute(self, rover: Rover):
         updated_rover = copy.copy(rover)
         updated_rover.cardinal_direction = 'S'
         return updated_rover
@@ -105,7 +106,7 @@ class TurnRightFromWestCommand(TurnRightCommand):
     def get_cardinal_direction(self):
         return 'W'
 
-    def execute(self, rover):
+    def execute(self, rover: Rover):
         updated_rover = copy.copy(rover)
         updated_rover.cardinal_direction = 'N'
         return updated_rover
