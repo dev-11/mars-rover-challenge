@@ -8,13 +8,13 @@ class RoverRunnerService:
     def run(self, commands: []):
 
         for command in commands:
-            if command != 'M':
+            if command == 'M':
+                strategy = list(filter(lambda s: s.get_cardinal_direction() == self._rover.cardinal_direction,
+                                       self._move_strategies))[0]
+            else:
                 strategy = list(filter(lambda s: s.get_turning_direction() == command
                                                  and s.get_cardinal_direction() == self._rover.cardinal_direction,
                                        self._turn_strategies))[0]
-            else:
-                strategy = list(filter(lambda s: s.get_cardinal_direction() == self._rover.cardinal_direction,
-                                       self._move_strategies))[0]
 
             updated_rover = strategy.update(self._rover)
 
