@@ -10,11 +10,11 @@ I assumed that the incoming commands are stored in a txt file.
 
 The flow of the code is the following:
 ```text
-+----------------------+   +----------------------+   +----------------------+   +----------------------+                
-|                      |   |                      |   |                      |   |                      |                
-|  reading input data  |-->|   parsing commands   |-->| running rover runner |-->| displaying positions |                
-|                      |   |                      |   |                      |   |                      |                
-+----------------------+   +----------------------+   +----------------------+   +----------------------+ 
++----------------------+   +----------------------+   +----------------------+   +----------------------+
+|                      |   |                      |   |                      |   |                      |
+|  reading input data  |-->|   parsing commands   |-->| running rover runner |-->| displaying positions |
+|                      |   |                      |   |                      |   |                      |
++----------------------+   +----------------------+   +----------------------+   +----------------------+
 ```
 
 ### Reading input data
