@@ -129,3 +129,12 @@ def get_turn_strategies():
 
     ]
 
+
+class TurnStrategySelector:
+    def __init__(self):
+        self._strategies = get_turn_strategies()
+
+    def get_strategy(self, cardinal_direction: chr, turning_direction: chr):
+        return list(filter(lambda s: s.get_turning_direction() == turning_direction
+                                     and s.get_cardinal_direction() == cardinal_direction,
+                           self._strategies))[0]

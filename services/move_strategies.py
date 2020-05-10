@@ -60,3 +60,12 @@ def get_move_strategies():
         MoveToEastStrategy(),
         MoveToWestStrategy()
     ]
+
+
+class MoveStrategySelector:
+    def __init__(self):
+        self._strategies = get_move_strategies()
+
+    def get_strategy(self, cardinal_direction: chr):
+        return list(filter(lambda s: s.get_cardinal_direction() == cardinal_direction,
+                    self._strategies))[0]

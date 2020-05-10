@@ -1,20 +1,24 @@
+from services.move_strategies import MoveStrategySelector
+from services.turn_strategies import TurnStrategySelector
+from data_objects import Grid, Rover
+
+
 class RoverRunnerService:
-    def __init__(self, grid, rover, move_strategies, turn_strategies):
+    def __init__(self, grid: Grid, rover: Rover,
+                 move_strategy_selector: MoveStrategySelector,
+                 turn_strategy_selector: TurnStrategySelector):
         self._grid = grid
         self._rover = rover
-        self._move_strategies = move_strategies
-        self._turn_strategies = turn_strategies
+        self._move_strategy_selector = move_strategy_selector
+        self._turn_strategy_selector = turn_strategy_selector
 
     def run(self, commands: []):
 
         for command in commands:
             if command == 'M':
-                strategy = list(filter(lambda s: s.get_cardinal_direction() == self._rover.cardinal_direction,
-                                       self._move_strategies))[0]
+                strategy = self._move_strategy_selector.get_strategy(self._rover.cardinal_direction)
             else:
-                strategy = list(filter(lambda s: s.get_turning_direction() == command
-                                                 and s.get_cardinal_direction() == self._rover.cardinal_direction,
-                                       self._turn_strategies))[0]
+                strategy = self._turn_strategy_selector.get_strategy(self._rover.cardinal_direction, command)
 
             updated_rover = strategy.update(self._rover)
 

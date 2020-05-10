@@ -1,0 +1,35 @@
+import unittest
+from services import RoverRunnerService
+from tests.test_environment.marses import small_mars_with_one_rover_empty_commands
+from tests.test_environment import mocks as m
+from data_objects import Rover
+
+
+class TestRoverRunnerService(unittest.TestCase):
+
+    def test_rover_runner_moves_rover_forward(self):
+        grid = small_mars_with_one_rover_empty_commands.grid
+        rover = small_mars_with_one_rover_empty_commands.rover_setups[0].rover
+        tss = m.get_mocked_turn_strategy_selector_turn_left_from_north_strategy_only()
+        mss = m.get_mocked_move_strategy_selector_north_strategy_only()
+        rrs = RoverRunnerService(grid, rover, mss, tss)
+        final_pos = rrs.run(['M'])
+        self.assertEqual(Rover(0, 1, 'N'), final_pos)
+
+    def test_rover_runner_turns_rover_left(self):
+        grid = small_mars_with_one_rover_empty_commands.grid
+        rover = small_mars_with_one_rover_empty_commands.rover_setups[0].rover
+        tss = m.get_mocked_turn_strategy_selector_turn_left_from_north_strategy_only()
+        mss = m.get_mocked_move_strategy_selector_north_strategy_only()
+        rrs = RoverRunnerService(grid, rover, mss, tss)
+        final_pos = rrs.run(['L'])
+        self.assertEqual(Rover(0, 0, 'W'), final_pos)
+
+    def test_rover_runner_turns_rover_right(self):
+        grid = small_mars_with_one_rover_empty_commands.grid
+        rover = small_mars_with_one_rover_empty_commands.rover_setups[0].rover
+        tss = m.get_mocked_turn_strategy_selector_turn_right_from_north_strategy_only()
+        mss = m.get_mocked_move_strategy_selector_north_strategy_only()
+        rrs = RoverRunnerService(grid, rover, mss, tss)
+        final_pos = rrs.run(['R'])
+        self.assertEqual(Rover(0, 0, 'E'), final_pos)

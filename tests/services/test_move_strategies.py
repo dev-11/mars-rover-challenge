@@ -2,6 +2,7 @@ import unittest
 from data_objects import Rover
 from services import move_strategies as ms
 from tests.test_environment import rovers
+from parameterized import parameterized
 
 
 class TestMoveToNorthStrategy(unittest.TestCase):
@@ -56,3 +57,24 @@ class TestStrategyCollection(unittest.TestCase):
     def test_get_move_strategies_return_every_item(self):
         lst = ms.get_move_strategies()
         self.assertEqual(4, len(lst))
+
+
+class TestMoveStrategySelector(unittest.TestCase):
+
+    @parameterized.expand([
+        ["north", 'N', 'N'],
+        ["east", 'E', 'E'],
+        ["west", 'W', 'W'],
+        ["south", 'S', 'S']])
+    def test_get_strategy_returns_correct_strategy(self, name, cardinal_direction, strategy_cardinal_direction):
+        mvs = ms.MoveStrategySelector()
+        s = mvs.get_strategy(cardinal_direction)
+        self.assertEqual(strategy_cardinal_direction, s.get_cardinal_direction())
+
+    @parameterized.expand([
+        ["invalid_cardinal_direction",  '-'],
+        ["empty_cardinal_direction",  ''],
+        ["None_cardinal_direction",  None]])
+    def test_get_strategy_raises_error_for_incorrect_parameters(self, name, cardinal_direction):
+        mvs = ms.MoveStrategySelector()
+        self.assertRaises(IndexError, mvs.get_strategy, cardinal_direction)

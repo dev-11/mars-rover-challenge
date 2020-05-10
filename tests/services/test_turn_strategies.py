@@ -2,6 +2,7 @@ import unittest
 from data_objects import Rover
 from services import turn_strategies as ts
 from tests.test_environment import rovers
+from parameterized import parameterized
 
 
 class TestTurnLeftFromNorthStrategy(unittest.TestCase):
@@ -144,3 +145,36 @@ class TestStrategyCollection(unittest.TestCase):
     def test_get_turn_strategies_return_every_item(self):
         lst = ts.get_turn_strategies()
         self.assertEqual(8, len(lst))
+
+
+class TestMoveStrategySelector(unittest.TestCase):
+
+    @parameterized.expand([
+        ["left_north",  'N', 'N', 'L', 'L'],
+        ["left_east",   'E', 'E', 'L', 'L'],
+        ["left_west",   'W', 'W', 'L', 'L'],
+        ["left_south",  'S', 'S', 'L', 'L'],
+        ["right_north", 'N', 'N', 'R', 'R'],
+        ["right_east",  'E', 'E', 'R', 'R'],
+        ["right_west",  'W', 'W', 'R', 'R'],
+        ["right_south", 'S', 'S', 'R', 'R']])
+    def test_get_strategy_returns_correct_strategy(self, name, cardinal_direction, strategy_cardinal_direction,
+                                                   turning_direction, strategy_turning_direction):
+        mvs = ts.TurnStrategySelector()
+        s = mvs.get_strategy(cardinal_direction, turning_direction)
+        self.assertEqual(strategy_cardinal_direction, s.get_cardinal_direction())
+        self.assertEqual(strategy_turning_direction, s.get_turning_direction())
+
+    @parameterized.expand([
+        ["invalid_cardinal_direction",  '-', 'L'],
+        ["empty_cardinal_direction", '', 'L'],
+        ["invalid_turning_direction",  'N', '-'],
+        ["empty_turning_direction", 'N', ''],
+        ["None_cardinal_direction", None, 'L'],
+        ["None_turning_direction", 'N', None],
+        ["both_params_None", None, None],
+        ["both_params_empty", '', ''],
+        ["both_params_invalid",  '-', '-']])
+    def test_get_strategy_raises_error_for_incorrect_parameters(self, name, cardinal_direction, turning_direction):
+        mvs = ts.TurnStrategySelector()
+        self.assertRaises(IndexError, mvs.get_strategy, cardinal_direction, turning_direction)

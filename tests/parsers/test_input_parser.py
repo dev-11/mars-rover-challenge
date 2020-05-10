@@ -6,13 +6,7 @@ import data_objects as do
 
 class TestInputParser(unittest.TestCase):
     def test_parse_returns_correct_data_for_sample_commands(self):
-        commands = [
-            '5 5',
-            '1 2 N',
-            'LMLMLMLMM',
-            '3 3 E',
-            'MMRMMRMRRM'
-        ]
+        commands = ['5 5', '1 2 N', 'LMLMLMLMM', '3 3 E', 'MMRMMRMRRM']
         mars = input_parser.parse(commands)
         self.assertEqual(marses.default_mars, mars)
 
