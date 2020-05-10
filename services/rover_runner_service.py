@@ -6,11 +6,11 @@ from data_objects import Grid, Rover
 class RoverRunnerService:
     def __init__(self, grid: Grid, rover: Rover,
                  move_command_selector: MoveCommandSelector,
-                 turn_commands_selector: TurnCommandSelector):
+                 turn_command_selector: TurnCommandSelector):
         self._grid = grid
         self._rover = rover
         self._move_command_selector = move_command_selector
-        self._turn_commands_selector = turn_commands_selector
+        self._turn_command_selector = turn_command_selector
 
     def run(self, commands: []):
 
@@ -18,7 +18,7 @@ class RoverRunnerService:
             if command_name == 'M':
                 command = self._move_command_selector.select(self._rover.cardinal_direction)
             else:
-                command = self._turn_commands_selector.select(self._rover.cardinal_direction, command_name)
+                command = self._turn_command_selector.select(self._rover.cardinal_direction, command_name)
 
             updated_rover = command.execute(self._rover)
 
