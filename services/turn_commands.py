@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 import copy
 
 
-class TurnStrategy(ABC):
+class TurnCommand(ABC):
     @abstractmethod
     def get_cardinal_direction(self):
         pass
@@ -12,129 +12,129 @@ class TurnStrategy(ABC):
         pass
 
     @abstractmethod
-    def update(self, rover):
+    def execute(self, rover):
         pass
 
 
-class TurnLeftStrategy(TurnStrategy):
+class TurnLeftCommand(TurnCommand):
     def get_turning_direction(self):
         return 'L'
 
 
-class TurnRightStrategy(TurnStrategy):
+class TurnRightCommand(TurnCommand):
     def get_turning_direction(self):
         return 'R'
 
 
-class TurnLeftFromNorthStrategy(TurnLeftStrategy):
+class TurnLeftFromNorthCommand(TurnLeftCommand):
 
     def get_cardinal_direction(self):
         return 'N'
 
-    def update(self, rover):
+    def execute(self, rover):
         updated_rover = copy.copy(rover)
         updated_rover.cardinal_direction = 'W'
         return updated_rover
 
 
-class TurnLeftFromSouthStrategy(TurnLeftStrategy):
+class TurnLeftFromSouthCommand(TurnLeftCommand):
 
     def get_cardinal_direction(self):
         return 'S'
 
-    def update(self, rover):
+    def execute(self, rover):
         updated_rover = copy.copy(rover)
         updated_rover.cardinal_direction = 'E'
         return updated_rover
 
 
-class TurnLeftFromEastStrategy(TurnLeftStrategy):
+class TurnLeftFromEastCommand(TurnLeftCommand):
 
     def get_cardinal_direction(self):
         return 'E'
 
-    def update(self, rover):
+    def execute(self, rover):
         updated_rover = copy.copy(rover)
         updated_rover.cardinal_direction = 'N'
         return updated_rover
 
 
-class TurnLeftFromWestStrategy(TurnLeftStrategy):
+class TurnLeftFromWestCommand(TurnLeftCommand):
 
     def get_cardinal_direction(self):
         return 'W'
 
-    def update(self, rover):
+    def execute(self, rover):
         updated_rover = copy.copy(rover)
         updated_rover.cardinal_direction = 'S'
         return updated_rover
 
 
-class TurnRightFromNorthStrategy(TurnRightStrategy):
+class TurnRightFromNorthCommand(TurnRightCommand):
 
     def get_cardinal_direction(self):
         return 'N'
 
-    def update(self, rover):
+    def execute(self, rover):
         updated_rover = copy.copy(rover)
         updated_rover.cardinal_direction = 'E'
         return updated_rover
 
 
-class TurnRightFromSouthStrategy(TurnRightStrategy):
+class TurnRightFromSouthCommand(TurnRightCommand):
 
     def get_cardinal_direction(self):
         return 'S'
 
-    def update(self, rover):
+    def execute(self, rover):
         updated_rover = copy.copy(rover)
         updated_rover.cardinal_direction = 'W'
         return updated_rover
 
 
-class TurnRightFromEastStrategy(TurnRightStrategy):
+class TurnRightFromEastCommand(TurnRightCommand):
 
     def get_cardinal_direction(self):
         return 'E'
 
-    def update(self, rover):
+    def execute(self, rover):
         updated_rover = copy.copy(rover)
         updated_rover.cardinal_direction = 'S'
         return updated_rover
 
 
-class TurnRightFromWestStrategy(TurnRightStrategy):
+class TurnRightFromWestCommand(TurnRightCommand):
 
     def get_cardinal_direction(self):
         return 'W'
 
-    def update(self, rover):
+    def execute(self, rover):
         updated_rover = copy.copy(rover)
         updated_rover.cardinal_direction = 'N'
         return updated_rover
 
 
-def get_turn_strategies():
+def get_turn_commands():
     return [
-        # left strategies
-        TurnLeftFromNorthStrategy(),
-        TurnLeftFromWestStrategy(),
-        TurnLeftFromEastStrategy(),
-        TurnLeftFromSouthStrategy(),
-        # right strategies
-        TurnRightFromNorthStrategy(),
-        TurnRightFromWestStrategy(),
-        TurnRightFromEastStrategy(),
-        TurnRightFromSouthStrategy()
+        # left commands
+        TurnLeftFromNorthCommand(),
+        TurnLeftFromWestCommand(),
+        TurnLeftFromEastCommand(),
+        TurnLeftFromSouthCommand(),
+        # right commands
+        TurnRightFromNorthCommand(),
+        TurnRightFromWestCommand(),
+        TurnRightFromEastCommand(),
+        TurnRightFromSouthCommand()
 
     ]
 
 
-class TurnStrategySelector:
+class TurnCommandSelector:
     def __init__(self):
-        self._strategies = get_turn_strategies()
+        self._strategies = get_turn_commands()
 
-    def get_strategy(self, cardinal_direction: chr, turning_direction: chr):
+    def get_command(self, cardinal_direction: chr, turning_direction: chr):
         return list(filter(lambda s: s.get_turning_direction() == turning_direction
                                      and s.get_cardinal_direction() == cardinal_direction,
                            self._strategies))[0]

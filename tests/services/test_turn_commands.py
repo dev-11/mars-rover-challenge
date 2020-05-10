@@ -1,153 +1,153 @@
 import unittest
 from data_objects import Rover
-from services import turn_strategies as ts
+from services import turn_commands as tc
 from tests.test_environment import rovers
 from parameterized import parameterized
 
 
-class TestTurnLeftFromNorthStrategy(unittest.TestCase):
+class TestTurnLeftFromNorthCommand(unittest.TestCase):
     def test_turn_turns_rover_to_west(self):
-        s = ts.TurnLeftFromNorthStrategy()
-        r = s.update(rovers.rover_00N)
+        s = tc.TurnLeftFromNorthCommand()
+        r = s.execute(rovers.rover_00N)
         self.assertEqual(Rover(0, 0, 'W'), r)
 
     def test_turning_direction_is_left(self):
-        s = ts.TurnLeftFromNorthStrategy()
+        s = tc.TurnLeftFromNorthCommand()
         d = s.get_turning_direction()
         self.assertEqual('L', d)
 
     def test_cardinal_direction_is_north(self):
-        s = ts.TurnLeftFromNorthStrategy()
+        s = tc.TurnLeftFromNorthCommand()
         d = s.get_cardinal_direction()
         self.assertEqual('N', d)
 
 
-class TestTurnLeftFromWestStrategy(unittest.TestCase):
+class TestTurnLeftFromWestCommand(unittest.TestCase):
     def test_turn_turns_rover_to_south(self):
-        s = ts.TurnLeftFromWestStrategy()
-        r = s.update(rovers.rover_00W)
+        s = tc.TurnLeftFromWestCommand()
+        r = s.execute(rovers.rover_00W)
         self.assertEqual(Rover(0, 0, 'S'), r)
 
     def test_turning_direction_is_left(self):
-        s = ts.TurnLeftFromWestStrategy()
+        s = tc.TurnLeftFromWestCommand()
         d = s.get_turning_direction()
         self.assertEqual('L', d)
 
     def test_cardinal_direction_is_west(self):
-        s = ts.TurnLeftFromWestStrategy()
+        s = tc.TurnLeftFromWestCommand()
         d = s.get_cardinal_direction()
         self.assertEqual('W', d)
 
 
-class TestTurnLeftFromEastStrategy(unittest.TestCase):
+class TestTurnLeftFromEastCommand(unittest.TestCase):
     def test_turn_turns_rover_to_north(self):
-        s = ts.TurnLeftFromEastStrategy()
-        r = s.update(rovers.rover_00E)
+        s = tc.TurnLeftFromEastCommand()
+        r = s.execute(rovers.rover_00E)
         self.assertEqual(Rover(0, 0, 'N'), r)
 
     def test_turning_direction_is_left(self):
-        s = ts.TurnLeftFromEastStrategy()
+        s = tc.TurnLeftFromEastCommand()
         d = s.get_turning_direction()
         self.assertEqual('L', d)
 
     def test_cardinal_direction_is_east(self):
-        s = ts.TurnLeftFromEastStrategy()
+        s = tc.TurnLeftFromEastCommand()
         d = s.get_cardinal_direction()
         self.assertEqual('E', d)
 
 
-class TestTurnLeftFromSouthStrategy(unittest.TestCase):
+class TestTurnLeftFromSouthCommand(unittest.TestCase):
     def test_turn_turns_rover_to_east(self):
-        s = ts.TurnLeftFromSouthStrategy()
-        r = s.update(rovers.rover_00S)
+        s = tc.TurnLeftFromSouthCommand()
+        r = s.execute(rovers.rover_00S)
         self.assertEqual(Rover(0, 0, 'E'), r)
 
     def test_turning_direction_is_left(self):
-        s = ts.TurnLeftFromSouthStrategy()
+        s = tc.TurnLeftFromSouthCommand()
         d = s.get_turning_direction()
         self.assertEqual('L', d)
 
     def test_cardinal_direction_is_south(self):
-        s = ts.TurnLeftFromSouthStrategy()
+        s = tc.TurnLeftFromSouthCommand()
         d = s.get_cardinal_direction()
         self.assertEqual('S', d)
 
 
-class TestTurnRightFromNorthStrategy(unittest.TestCase):
+class TestTurnRightFromNorthCommand(unittest.TestCase):
     def test_turn_turns_rover_to_east(self):
-        s = ts.TurnRightFromNorthStrategy()
-        r = s.update(rovers.rover_00N)
+        s = tc.TurnRightFromNorthCommand()
+        r = s.execute(rovers.rover_00N)
         self.assertEqual(Rover(0, 0, 'E'), r)
 
     def test_turning_direction_is_left(self):
-        s = ts.TurnRightFromNorthStrategy()
+        s = tc.TurnRightFromNorthCommand()
         d = s.get_turning_direction()
         self.assertEqual('R', d)
 
     def test_cardinal_direction_is_north(self):
-        s = ts.TurnRightFromNorthStrategy()
+        s = tc.TurnRightFromNorthCommand()
         d = s.get_cardinal_direction()
         self.assertEqual('N', d)
 
 
-class TestTurnRightFromWestStrategy(unittest.TestCase):
+class TestTurnRightFromWestCommand(unittest.TestCase):
     def test_turn_turns_rover_to_north(self):
-        s = ts.TurnRightFromWestStrategy()
-        r = s.update(rovers.rover_00W)
+        s = tc.TurnRightFromWestCommand()
+        r = s.execute(rovers.rover_00W)
         self.assertEqual(Rover(0, 0, 'N'), r)
 
     def test_turning_direction_is_left(self):
-        s = ts.TurnRightFromWestStrategy()
+        s = tc.TurnRightFromWestCommand()
         d = s.get_turning_direction()
         self.assertEqual('R', d)
 
     def test_cardinal_direction_is_west(self):
-        s = ts.TurnRightFromWestStrategy()
+        s = tc.TurnRightFromWestCommand()
         d = s.get_cardinal_direction()
         self.assertEqual('W', d)
 
 
-class TestTurnRightFromEastStrategy(unittest.TestCase):
+class TestTurnRightFromEastCommand(unittest.TestCase):
     def test_turn_turns_rover_to_south(self):
-        s = ts.TurnRightFromEastStrategy()
-        r = s.update(rovers.rover_00E)
+        s = tc.TurnRightFromEastCommand()
+        r = s.execute(rovers.rover_00E)
         self.assertEqual(Rover(0, 0, 'S'), r)
 
     def test_turning_direction_is_left(self):
-        s = ts.TurnRightFromEastStrategy()
+        s = tc.TurnRightFromEastCommand()
         d = s.get_turning_direction()
         self.assertEqual('R', d)
 
     def test_cardinal_direction_is_east(self):
-        s = ts.TurnRightFromEastStrategy()
+        s = tc.TurnRightFromEastCommand()
         d = s.get_cardinal_direction()
         self.assertEqual('E', d)
 
 
-class TestTurnRightFromSouthStrategy(unittest.TestCase):
+class TestTurnRightFromSouthCommand(unittest.TestCase):
     def test_turn_turns_rover_to_west(self):
-        s = ts.TurnRightFromSouthStrategy()
-        r = s.update(rovers.rover_00S)
+        s = tc.TurnRightFromSouthCommand()
+        r = s.execute(rovers.rover_00S)
         self.assertEqual(Rover(0, 0, 'W'), r)
 
     def test_turning_direction_is_left(self):
-        s = ts.TurnRightFromSouthStrategy()
+        s = tc.TurnRightFromSouthCommand()
         d = s.get_turning_direction()
         self.assertEqual('R', d)
 
     def test_cardinal_direction_is_south(self):
-        s = ts.TurnRightFromSouthStrategy()
+        s = tc.TurnRightFromSouthCommand()
         d = s.get_cardinal_direction()
         self.assertEqual('S', d)
 
 
-class TestStrategyCollection(unittest.TestCase):
-    def test_get_turn_strategies_return_every_item(self):
-        lst = ts.get_turn_strategies()
+class TestCommandCollection(unittest.TestCase):
+    def test_get_turn_commands_return_every_item(self):
+        lst = tc.get_turn_commands()
         self.assertEqual(8, len(lst))
 
 
-class TestMoveStrategySelector(unittest.TestCase):
+class TestMoveCommandSelector(unittest.TestCase):
 
     @parameterized.expand([
         ["left_north",  'N', 'N', 'L', 'L'],
@@ -158,12 +158,12 @@ class TestMoveStrategySelector(unittest.TestCase):
         ["right_east",  'E', 'E', 'R', 'R'],
         ["right_west",  'W', 'W', 'R', 'R'],
         ["right_south", 'S', 'S', 'R', 'R']])
-    def test_get_strategy_returns_correct_strategy(self, name, cardinal_direction, strategy_cardinal_direction,
-                                                   turning_direction, strategy_turning_direction):
-        mvs = ts.TurnStrategySelector()
-        s = mvs.get_strategy(cardinal_direction, turning_direction)
-        self.assertEqual(strategy_cardinal_direction, s.get_cardinal_direction())
-        self.assertEqual(strategy_turning_direction, s.get_turning_direction())
+    def test_get_command_returns_correct_command(self, name, cardinal_direction, command_cardinal_direction,
+                                                   turning_direction, command_turning_direction):
+        mvs = tc.TurnCommandSelector()
+        s = mvs.get_command(cardinal_direction, turning_direction)
+        self.assertEqual(command_cardinal_direction, s.get_cardinal_direction())
+        self.assertEqual(command_turning_direction, s.get_turning_direction())
 
     @parameterized.expand([
         ["invalid_cardinal_direction",  '-', 'L'],
@@ -175,6 +175,6 @@ class TestMoveStrategySelector(unittest.TestCase):
         ["both_params_None", None, None],
         ["both_params_empty", '', ''],
         ["both_params_invalid",  '-', '-']])
-    def test_get_strategy_raises_error_for_incorrect_parameters(self, name, cardinal_direction, turning_direction):
-        mvs = ts.TurnStrategySelector()
-        self.assertRaises(IndexError, mvs.get_strategy, cardinal_direction, turning_direction)
+    def test_get_command_raises_error_for_incorrect_parameters(self, name, cardinal_direction, turning_direction):
+        mvs = tc.TurnCommandSelector()
+        self.assertRaises(IndexError, mvs.get_command, cardinal_direction, turning_direction)

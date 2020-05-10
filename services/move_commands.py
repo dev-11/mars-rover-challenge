@@ -3,69 +3,69 @@ from abc import ABC, abstractmethod
 from copy import copy
 
 
-class MoveStrategy(ABC):
+class MoveCommand(ABC):
     @abstractmethod
     def get_cardinal_direction(self):
         pass
 
     @abstractmethod
-    def update(self, rover: Rover):
+    def execute(self, rover: Rover):
         pass
 
 
-class MoveToNorthStrategy(MoveStrategy):
+class MoveToNorthCommand(MoveCommand):
     def get_cardinal_direction(self):
         return 'N'
 
-    def update(self, rover: Rover):
+    def execute(self, rover: Rover):
         updated = copy(rover)
         updated.y += 1
         return updated
 
 
-class MoveToSouthStrategy(MoveStrategy):
+class MoveToSouthCommand(MoveCommand):
     def get_cardinal_direction(self):
         return 'S'
 
-    def update(self, rover: Rover):
+    def execute(self, rover: Rover):
         updated = copy(rover)
         updated.y -= 1
         return updated
 
 
-class MoveToEastStrategy(MoveStrategy):
+class MoveToEastCommand(MoveCommand):
     def get_cardinal_direction(self):
         return 'E'
 
-    def update(self, rover: Rover):
+    def execute(self, rover: Rover):
         updated = copy(rover)
         updated.x += 1
         return updated
 
 
-class MoveToWestStrategy(MoveStrategy):
+class MoveToWestCommand(MoveCommand):
     def get_cardinal_direction(self):
         return 'W'
 
-    def update(self, rover: Rover):
+    def execute(self, rover: Rover):
         updated = copy(rover)
         updated.x -= 1
         return updated
 
 
-def get_move_strategies():
+def get_move_commands():
     return [
-        MoveToNorthStrategy(),
-        MoveToSouthStrategy(),
-        MoveToEastStrategy(),
-        MoveToWestStrategy()
+        MoveToNorthCommand(),
+        MoveToSouthCommand(),
+        MoveToEastCommand(),
+        MoveToWestCommand()
     ]
 
 
-class MoveStrategySelector:
+class MoveCommandSelector:
     def __init__(self):
-        self._strategies = get_move_strategies()
+        self._strategies = get_move_commands()
 
-    def get_strategy(self, cardinal_direction: chr):
+    def get_command(self, cardinal_direction: chr):
         return list(filter(lambda s: s.get_cardinal_direction() == cardinal_direction,
                     self._strategies))[0]

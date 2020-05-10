@@ -1,26 +1,26 @@
-from services.move_strategies import MoveStrategySelector
-from services.turn_strategies import TurnStrategySelector
+from services.move_commands import MoveCommandSelector
+from services.turn_commands import TurnCommandSelector
 from data_objects import Grid, Rover
 
 
 class RoverRunnerService:
     def __init__(self, grid: Grid, rover: Rover,
-                 move_strategy_selector: MoveStrategySelector,
-                 turn_strategy_selector: TurnStrategySelector):
+                 move_command_selector: MoveCommandSelector,
+                 turn_commands_selector: TurnCommandSelector):
         self._grid = grid
         self._rover = rover
-        self._move_strategy_selector = move_strategy_selector
-        self._turn_strategy_selector = turn_strategy_selector
+        self._move_command_selector = move_command_selector
+        self._turn_commands_selector = turn_commands_selector
 
     def run(self, commands: []):
 
-        for command in commands:
-            if command == 'M':
-                strategy = self._move_strategy_selector.get_strategy(self._rover.cardinal_direction)
+        for c in commands:
+            if c == 'M':
+                command = self._move_command_selector.get_command(self._rover.cardinal_direction)
             else:
-                strategy = self._turn_strategy_selector.get_strategy(self._rover.cardinal_direction, command)
+                command = self._turn_commands_selector.get_command(self._rover.cardinal_direction, c)
 
-            updated_rover = strategy.update(self._rover)
+            updated_rover = command.execute(self._rover)
 
             if not (0 <= updated_rover.y <= self._grid.max_y) or not (0 <= updated_rover.x <= self._grid.max_x):
                 raise ValueError(f"Can't drive the rover off the grid: {updated_rover}")
