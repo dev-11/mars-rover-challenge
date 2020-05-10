@@ -56,6 +56,20 @@ At the moment I see two things.
 1.  There is no data validation at all, the system assumes that it will receive correct data.
 2.  If there is an error, like an invalid command or the rover is going off the grid, the system will fail. It would be nice to have a fail-safe solution where we log and ignore the error and continue the execution of the rover commands.    
 
+### How to run
+There is just one dependency which is the `parameterized` package for the unit tests.
+
+The app can be run by executing the following command. 
+```shell script
+ python3 app.py
+```
+
+The unit tests can be run by the following command:
+```shell script
+pytest
+```
+
+
 ---
 
 ## Introduction
