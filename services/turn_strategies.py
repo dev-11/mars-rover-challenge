@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+import copy
 
 
 class TurnStrategy(ABC):
@@ -31,8 +32,9 @@ class TurnLeftFromNorthStrategy(TurnLeftStrategy):
         return 'N'
 
     def update(self, rover):
-        rover.cardinal_direction = 'W'
-        return rover
+        updated_rover = copy.copy(rover)
+        updated_rover.cardinal_direction = 'W'
+        return updated_rover
 
 
 class TurnLeftFromSouthStrategy(TurnLeftStrategy):
@@ -41,8 +43,9 @@ class TurnLeftFromSouthStrategy(TurnLeftStrategy):
         return 'S'
 
     def update(self, rover):
-        rover.cardinal_direction = 'E'
-        return rover
+        updated_rover = copy.copy(rover)
+        updated_rover.cardinal_direction = 'E'
+        return updated_rover
 
 
 class TurnLeftFromEastStrategy(TurnLeftStrategy):
@@ -51,8 +54,9 @@ class TurnLeftFromEastStrategy(TurnLeftStrategy):
         return 'E'
 
     def update(self, rover):
-        rover.cardinal_direction = 'N'
-        return rover
+        updated_rover = copy.copy(rover)
+        updated_rover.cardinal_direction = 'N'
+        return updated_rover
 
 
 class TurnLeftFromWestStrategy(TurnLeftStrategy):
@@ -61,8 +65,9 @@ class TurnLeftFromWestStrategy(TurnLeftStrategy):
         return 'W'
 
     def update(self, rover):
-        rover.cardinal_direction = 'S'
-        return rover
+        updated_rover = copy.copy(rover)
+        updated_rover.cardinal_direction = 'S'
+        return updated_rover
 
 
 class TurnRightFromNorthStrategy(TurnRightStrategy):
@@ -71,8 +76,9 @@ class TurnRightFromNorthStrategy(TurnRightStrategy):
         return 'N'
 
     def update(self, rover):
-        rover.cardinal_direction = 'E'
-        return rover
+        updated_rover = copy.copy(rover)
+        updated_rover.cardinal_direction = 'E'
+        return updated_rover
 
 
 class TurnRightFromSouthStrategy(TurnRightStrategy):
@@ -81,8 +87,9 @@ class TurnRightFromSouthStrategy(TurnRightStrategy):
         return 'S'
 
     def update(self, rover):
-        rover.cardinal_direction = 'W'
-        return rover
+        updated_rover = copy.copy(rover)
+        updated_rover.cardinal_direction = 'W'
+        return updated_rover
 
 
 class TurnRightFromEastStrategy(TurnRightStrategy):
@@ -91,8 +98,9 @@ class TurnRightFromEastStrategy(TurnRightStrategy):
         return 'E'
 
     def update(self, rover):
-        rover.cardinal_direction = 'S'
-        return rover
+        updated_rover = copy.copy(rover)
+        updated_rover.cardinal_direction = 'S'
+        return updated_rover
 
 
 class TurnRightFromWestStrategy(TurnRightStrategy):
@@ -101,8 +109,9 @@ class TurnRightFromWestStrategy(TurnRightStrategy):
         return 'W'
 
     def update(self, rover):
-        rover.cardinal_direction = 'N'
-        return rover
+        updated_rover = copy.copy(rover)
+        updated_rover.cardinal_direction = 'N'
+        return updated_rover
 
 
 def get_turn_strategies():

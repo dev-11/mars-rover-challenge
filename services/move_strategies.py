@@ -1,5 +1,6 @@
 from data_objects import Rover
 from abc import ABC, abstractmethod
+from copy import copy
 
 
 class MoveStrategy(ABC):
@@ -17,8 +18,9 @@ class MoveToNorthStrategy(MoveStrategy):
         return 'N'
 
     def update(self, rover: Rover):
-        rover.y += 1
-        return rover
+        updated = copy(rover)
+        updated.y += 1
+        return updated
 
 
 class MoveToSouthStrategy(MoveStrategy):
@@ -26,8 +28,9 @@ class MoveToSouthStrategy(MoveStrategy):
         return 'S'
 
     def update(self, rover: Rover):
-        rover.y -= 1
-        return rover
+        updated = copy(rover)
+        updated.y -= 1
+        return updated
 
 
 class MoveToEastStrategy(MoveStrategy):
@@ -35,8 +38,9 @@ class MoveToEastStrategy(MoveStrategy):
         return 'E'
 
     def update(self, rover: Rover):
-        rover.x += 1
-        return rover
+        updated = copy(rover)
+        updated.x += 1
+        return updated
 
 
 class MoveToWestStrategy(MoveStrategy):
@@ -44,8 +48,9 @@ class MoveToWestStrategy(MoveStrategy):
         return 'W'
 
     def update(self, rover: Rover):
-        rover.x -= 1
-        return rover
+        updated = copy(rover)
+        updated.x -= 1
+        return updated
 
 
 def get_move_strategies():
