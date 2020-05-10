@@ -57,7 +57,7 @@ At the moment I see two things.
 2.  If there is an error, like an invalid command or the rover is going off the grid, the system will fail. It would be nice to have a fail-safe solution where we log and ignore the error and continue the execution of the rover commands.    
 
 ### How to run
-There is just one dependency which is the `parameterized` package for the unit tests.
+There is just one dependency which is the [parameterized](https://pypi.org/project/parameterized/) package for the unit tests.
 
 The app can be run by executing the following command. 
 ```shell script
