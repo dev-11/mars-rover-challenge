@@ -4,7 +4,7 @@ from abc import ABC, abstractmethod
 
 class MoveStrategy(ABC):
     @abstractmethod
-    def get_direction(self):
+    def get_cardinal_direction(self):
         pass
 
     @abstractmethod
@@ -13,7 +13,7 @@ class MoveStrategy(ABC):
 
 
 class MoveToNorthStrategy(MoveStrategy):
-    def get_direction(self):
+    def get_cardinal_direction(self):
         return 'N'
 
     def update(self, rover: Rover):
@@ -22,7 +22,7 @@ class MoveToNorthStrategy(MoveStrategy):
 
 
 class MoveToSouthStrategy(MoveStrategy):
-    def get_direction(self):
+    def get_cardinal_direction(self):
         return 'S'
 
     def update(self, rover: Rover):
@@ -31,7 +31,7 @@ class MoveToSouthStrategy(MoveStrategy):
 
 
 class MoveToEastStrategy(MoveStrategy):
-    def get_direction(self):
+    def get_cardinal_direction(self):
         return 'E'
 
     def update(self, rover: Rover):
@@ -40,7 +40,7 @@ class MoveToEastStrategy(MoveStrategy):
 
 
 class MoveToWestStrategy(MoveStrategy):
-    def get_direction(self):
+    def get_cardinal_direction(self):
         return 'W'
 
     def update(self, rover: Rover):

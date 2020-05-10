@@ -9,10 +9,12 @@ class RoverRunnerService:
 
         for command in commands:
             if command != 'M':
-                strategy = list(filter(lambda s: s.get_direction() == command
-                            and s.get_position() == self._rover.direction, self._rotate_strategies))[0]
+                strategy = list(filter(lambda s: s.get_turning_direction() == command
+                                                 and s.get_cardinal_direction() == self._rover.cardinal_direction,
+                                       self._rotate_strategies))[0]
             else:
-                strategy = list(filter(lambda s: s.get_direction() == self._rover.direction, self._move_strategies))[0]
+                strategy = list(filter(lambda s: s.get_cardinal_direction() == self._rover.cardinal_direction,
+                                       self._move_strategies))[0]
 
             self._rover = strategy.update(self._rover)
 

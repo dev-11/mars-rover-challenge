@@ -11,10 +11,10 @@ class Grid:
 class Rover:
     x: int
     y: int
-    direction: chr
+    cardinal_direction: chr
 
     def __str__(self):
-        return f'{self.x} {self.y} {self.direction}'
+        return f'{self.x} {self.y} {self.cardinal_direction}'
 
 
 @dataclass
