@@ -39,7 +39,7 @@ To do that the instance of the service needs a `Grid`, a `Rover`, a `MoveStrateg
 After the service has been created we need to run the `run` command passing in the commands for the rover.
 
 The  `MoveStrategySelector` and `TurnStrategySelector` return a strategy, based on the actual command.
-Here I introduced the strategy pattern to make the life easier, and the code cleaner.
+Here I introduced the [strategy pattern](https://en.wikipedia.org/wiki/Strategy_pattern) to make the life easier, and the code cleaner.
 
 When the runner tries to move the rover off grid the runner will raise a `ValueError`.  
 
