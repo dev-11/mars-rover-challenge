@@ -138,3 +138,9 @@ class TestTurnRightFromSouthStrategy(unittest.TestCase):
         s = ts.TurnRightFromSouthStrategy()
         d = s.get_cardinal_direction()
         self.assertEqual('S', d)
+
+
+class TestStrategyCollection(unittest.TestCase):
+    def test_get_turn_strategies_return_every_item(self):
+        lst = ts.get_turn_strategies()
+        self.assertEqual(8, len(lst))
